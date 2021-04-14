@@ -1,0 +1,24 @@
+.popup__field {
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  padding: 0 0 10px;
+  width: 100%;
+  margin-bottom: 30px;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__field:last-of-type {
+  margin-bottom: 0;
+}
+
+.popup__field:focus {
+  outline: none;
+}

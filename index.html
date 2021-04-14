@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru" class="page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body>
+  <header class="header">
+    <img class="header__logo" src="images/logo.svg" alt="Логотип Место">
+    <div class="header__line"></div>
+  </header>
+
+  <main class="content">
+    <section class="profile">
+      <div class="profile__container">
+        <img src="images/Avatar.png" alt="Аватар" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button"></button>
+          <p class="profile__about">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <img src="images/Moscow.jpg" alt="Москва" class="card__photo">
+        <h2 class="card__place-name">Москва</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="images/SPB.jpg" alt="Санкт-Петербург" class="card__photo">
+        <h2 class="card__place-name">Санкт-Петербург</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="images/Sochi.jpg" alt="Сочи" class="card__photo">
+        <h2 class="card__place-name">Сочи</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="images/baikal.jpg" alt="Озеро Байкал" class="card__photo">
+        <h2 class="card__place-name">Озеро Байкал</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="images/Elbrus.jpg" alt="Эльбрус" class="card__photo">
+        <h2 class="card__place-name">Эльбрус</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="images/Vladivostok.jpg" alt="Владивосток" class="card__photo">
+        <h2 class="card__place-name">Владивосток</h2>
+        <div class="card__like"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+  </footer>
+
+  <div class="popup">
+    <form action="#" class="popup__container">
+      <button class="popup__close-icon"></button>
+      <h2 class="popup__heading">Редактировать профиль</h2>
+      <fieldset class="popup__fields">
+        <input class="popup__field" type="text">
+        <input class="popup__field" type="text">
+      </fieldset>
+      <button class="popup__submit-button">Сохранить</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+.popup__close-icon {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 40px;
+  height: 40px;
+  background-image: url(../../../images/plus.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(-45deg);
+  border: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: opacity 0.8s;
+}
+
+.popup__close-icon:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__close-icon {
+    right: 0;
+    width: 26px;
+    height: 26px;
+  }
+}
