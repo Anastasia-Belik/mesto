@@ -1,6 +1,6 @@
 .card__place-name {
   color: #000;
-  font-family: Inter;
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -9,11 +9,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-
-@media screen and (max-width: 425px) {
-  .card__place-name {
-    font-size: 24px;
-    line-height: 29px;
-  }
 }

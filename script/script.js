@@ -2,10 +2,12 @@
 
 let editButton = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
-let nameInput = document.querySelector('.name-input');
-let jobInput = document.querySelector('.job-input');
+let nameInput = document.querySelector('.popup__field_input_name');
+let jobInput = document.querySelector('.popup__field_input_job');
 let userName = document.querySelector('.profile__user-name');
 let userJob = document.querySelector('.profile__about');
+let closeButton = document.querySelector('.popup__close-icon');
+let formElement = document.querySelector('.popup__user-info');
 
 function openPopup() {
   popup.classList.add('popup_opened');
@@ -13,21 +15,13 @@ function openPopup() {
   jobInput.value = userJob.textContent;
 }
 
-editButton.addEventListener('click', openPopup);
-
 //закрытие формы без сохранения
-
-let closeButton = document.querySelector('.popup__close-icon');
 
 function closePopup() {
   popup.classList.remove('popup_opened');
 }
 
-closeButton.addEventListener('click', closePopup);
-
 //отправка формы
-
-let formElement = document.querySelector('.popup__container');
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -38,4 +32,6 @@ function formSubmitHandler(evt) {
   closePopup();
 }
 
+editButton.addEventListener('click', openPopup);
 formElement.addEventListener('submit', formSubmitHandler);
+closeButton.addEventListener('click', closePopup);
