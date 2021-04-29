@@ -26,48 +26,17 @@
       <button class="profile__add-button" type="button" aria-label="Добавить фото"></button>
     </section>
 
-    <section class="cards">
-      <div class="card">
-        <img src="images/Moscow.jpg" alt="Москва" class="card__photo">
-        <h2 class="card__place-name">Москва</h2>
-        <button class="card__like" type="button" aria-label="Поставить лайк"></button>
-      </div>
-      <div class="card">
-        <img src="images/SPB.jpg" alt="Санкт-Петербург" class="card__photo">
-        <h2 class="card__place-name">Санкт-Петербург</h2>
-        <button class="card__like" type="button" aria-label="Поставить лайк"></button>
-      </div>
-      <div class="card">
-        <img src="images/Sochi.jpg" alt="Сочи" class="card__photo">
-        <h2 class="card__place-name">Сочи</h2>
-        <button class="card__like" type="button" aria-label="Поставить лайк"></button>
-      </div>
-      <div class="card">
-        <img src="images/baikal.jpg" alt="Озеро Байкал" class="card__photo">
-        <h2 class="card__place-name">Озеро Байкал</h2>
-        <button class="card__like" type="button" aria-label="Поставить лайк"></button>
-      </div>
-      <div class="card">
-        <img src="images/Elbrus.jpg" alt="Эльбрус" class="card__photo">
-        <h2 class="card__place-name">Эльбрус</h2>
-        <button class="card__like" type="button" aria-label="Поставить лайк"></button>
-      </div>
-      <div class="card">
-        <img src="images/Vladivostok.jpg" alt="Владивосток" class="card__photo">
-        <h2 class="card__place-name">Владивосток</h2>
-        <button class="card__like" type="button" aria-label="Поставить лайк"></button>
-      </div>
-    </section>
+    <section class="cards"></section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close-icon" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
-      <form action="#" name="user-info" class="popup__user-info">
+      <form action="#" name="user-info" class="popup__form">
         <fieldset class="popup__fields">
           <input class="popup__field popup__field_input_name" type="text" name="name-input">
           <input class="popup__field popup__field_input_job" type="text" name="job-input">
@@ -76,6 +45,28 @@
       </form>
     </div>
   </div>
+  <div class="popup popup_type_new-card">
+    <div class="popup__container">
+      <button class="popup__close-icon" type="button" aria-label="Закрыть"></button>
+      <h2 class="popup__heading">Новое место</h2>
+      <form action="#" name="new-place" class="popup__form">
+        <fieldset class="popup__fields">
+          <input class="popup__field popup__field_input_place-name" type="text" name="placename-input" placeholder="Название">
+          <input class="popup__field popup__field_input_place-link" type="text" name="placelink-input" placeholder="Ссылка на картинку">
+        </fieldset>
+        <button type="submit" class="popup__submit-button">Создать</button>
+      </form>
+    </div>
+  </div>
+  <template id="card-template">
+    <div class="card">
+      <img src="" alt="" class="card__photo">
+      <button class="card__del-btn" type="button" aria-label="Удалить карточку"></button>
+      <h2 class="card__place-name"></h2>
+      <button class="card__like" type="button" aria-label="Поставить лайк"></button>
+    </div>
+  </template>
+
   <script src="script/script.js"></script>
 </body>
 

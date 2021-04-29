@@ -3,6 +3,7 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 42px;
+  grid-template-rows: 282px 79px;
   background-color: #fff;
   align-items: center;
 }
