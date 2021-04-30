@@ -20,6 +20,11 @@
   opacity: 0.6;
 }
 
+.popup__close-icon:focus {
+  outline: none;
+}
+
+
 @media screen and (max-width: 540px) {
   .popup__close-icon {
     right: 0;
