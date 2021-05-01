@@ -19,6 +19,8 @@ const closeNewCardButton = document.querySelector('.popup_type_new-card').queryS
 
 //просмотр полного изображения
 const popupImg = document.querySelector('.popup_type_img');
+const fullImg = popupImg.querySelector('.popup__img');
+const popupImgHeading = popupImg.querySelector('.popup__heading');
 const closeImgButton = document.querySelector('.popup_type_img').querySelector('.popup__close-icon');
 
 //////////////////////////////////////////
@@ -43,6 +45,9 @@ function createCard(link, linkName) {
   cardPhoto.src = link;
   cardPhoto.alt = linkName;
   card.querySelector('.card__place-name').textContent = linkName;
+  setLikeCardListener(card);
+  setDeleteCardListener(card);
+  setOpenImgPopupListener(card);
   return card;
 }
 
@@ -69,9 +74,6 @@ function setOpenImgPopupListener(curentCard) {
 
 function addCard(card) {
   document.querySelector('.cards').prepend(card);
-  setLikeCardListener(card);
-  setDeleteCardListener(card);
-  setOpenImgPopupListener(card);
 }
 
 function newCardFormSubmitHandler(evt) {
@@ -102,10 +104,9 @@ function editProfileFormSubmitHandler(evt) {
 
 function openImgPopup(cardImg) {
   toggleModal(popupImg);
-  const fullImg = popupImg.querySelector('.popup__img')
   fullImg.src = cardImg.src;
   fullImg.alt = cardImg.alt;
-  popupImg.querySelector('.popup__heading').textContent = cardImg.alt;
+  popupImgHeading.textContent = cardImg.alt;
 }
 
 /////////////////////////////////////
