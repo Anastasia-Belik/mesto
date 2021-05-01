@@ -21,7 +21,7 @@ const closeNewCardButton = document.querySelector('.popup_type_new-card').queryS
 const popupImg = document.querySelector('.popup_type_img');
 const fullImg = popupImg.querySelector('.popup__img');
 const popupImgHeading = popupImg.querySelector('.popup__heading');
-const closeImgButton = document.querySelector('.popup_type_img').querySelector('.popup__close-icon');
+const closeImgButton = popupImg.querySelector('.popup__close-icon');
 
 //////////////////////////////////////////
 
