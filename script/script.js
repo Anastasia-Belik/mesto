@@ -5,17 +5,17 @@ const nameInput = document.querySelector('.popup__field_input_name');
 const jobInput = document.querySelector('.popup__field_input_job');
 const userName = document.querySelector('.profile__user-name');
 const userJob = document.querySelector('.profile__about');
-const closeEditButton = document.querySelector('.popup_type_edit').querySelector('.popup__close-icon');
-const editFormElement = document.querySelector('.popup_type_edit').querySelector('.popup__form');
+const closeEditButton = popupEdit.querySelector('.popup__close-icon');
+const editFormElement = popupEdit.querySelector('.popup__form');
 
 //добавление новой карточки
 const cardTemplate = document.querySelector('#card-template').content;
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const addNewCardButton = document.querySelector('.profile__add-button');
-const placeName = document.querySelector('.popup_type_new-card').querySelector('.popup__field_input_place-name');
-const placeLink = document.querySelector('.popup_type_new-card').querySelector('.popup__field_input_place-link');
-const newCardFormElement = document.querySelector('.popup_type_new-card').querySelector('.popup__form');
-const closeNewCardButton = document.querySelector('.popup_type_new-card').querySelector('.popup__close-icon');
+const placeName = popupNewCard.querySelector('.popup__field_input_place-name');
+const placeLink = popupNewCard.querySelector('.popup__field_input_place-link');
+const newCardFormElement = popupNewCard.querySelector('.popup__form');
+const closeNewCardButton = popupNewCard.querySelector('.popup__close-icon');
 
 //просмотр полного изображения
 const popupImg = document.querySelector('.popup_type_img');
