@@ -15,10 +15,6 @@
   color: #000000;
 }
 
-.popup__field:last-of-type {
-  margin-bottom: 0;
-}
-
 .popup__field:focus {
   outline: none;
 }

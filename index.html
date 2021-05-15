@@ -38,12 +38,16 @@
       <h2 class="popup__heading">Редактировать профиль</h2>
       <form action="#" name="user-info" class="popup__form">
         <fieldset class="popup__fields">
-          <input id="name-input" class="popup__field popup__field_input_name" type="text" name="name-input"
-            placeholder="Имя" required minlength="2" maxlength="40">
-          <span class="popup__error name-input-error">rrrrr</span>
-          <input id="job-input" class="popup__field popup__field_input_job" type="text" name="job-input"
-            placeholder="Вид деятельности" required minlength="2" maxlength="200">
-          <span class="popup__error job-input-error">rrrrr</span>
+          <div class="popup__input">
+            <input id="name-input" class="popup__field popup__field_input_name" type="text" name="name-input"
+              placeholder="Имя" required minlength="2" maxlength="40">
+            <span class="popup__error name-input-error">rrrrr</span>
+          </div>
+          <div class="popup__input">
+            <input id="job-input" class="popup__field popup__field_input_job" type="text" name="job-input"
+              placeholder="Вид деятельности" required minlength="2" maxlength="200">
+            <span class="popup__error job-input-error">rrrrr</span>
+          </div>
         </fieldset>
         <button type="submit" class="popup__submit-button">Сохранить</button>
       </form>
@@ -55,12 +59,16 @@
       <h2 class="popup__heading">Новое место</h2>
       <form action="#" name="new-place" class="popup__form">
         <fieldset class="popup__fields">
-          <input id="placename-input" class="popup__field popup__field_input_place-name" type="text"
-            name="placename-input" placeholder="Название" required minlength="2" maxlength="30">
-          <span class="popup__error placename-input-error">rrrrr</span>
-          <input id="placelink-input" class="popup__field popup__field_input_place-link" type="url"
-            name="placelink-input" placeholder="Ссылка на картинку" required>
-          <span class="popup__error placelink-input-error">rrrrrrr</span>
+          <div class="popup__input">
+            <input id="placename-input" class="popup__field popup__field_input_place-name" type="text"
+              name="placename-input" placeholder="Название" required minlength="2" maxlength="30">
+            <span class="popup__error placename-input-error">rrrrr</span>
+          </div>
+          <div class="popup__input">
+            <input id="placelink-input" class="popup__field popup__field_input_place-link" type="url"
+              name="placelink-input" placeholder="Ссылка на картинку" required>
+            <span class="popup__error placelink-input-error">rrrrrrr</span>
+          </div>
         </fieldset>
         <button type="submit" class="popup__submit-button">Создать</button>
       </form>
