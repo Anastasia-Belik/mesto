@@ -8,6 +8,7 @@ const userJob = document.querySelector('.profile__about');
 const closeEditButton = popupEdit.querySelector('.popup__close-icon');
 const editFormElement = popupEdit.querySelector('.popup__form');
 
+
 //добавление новой карточки
 const cardTemplate = document.querySelector('#card-template').content;
 const popupNewCard = document.querySelector('.popup_type_new-card');
@@ -23,6 +24,8 @@ const fullImg = popupImg.querySelector('.popup__img');
 const popupImgHeading = popupImg.querySelector('.popup__heading');
 const closeImgButton = popupImg.querySelector('.popup__close-icon');
 
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
 //////////////////////////////////////////
 
 //универсальные функции
@@ -34,6 +37,10 @@ function toggleModal(popup) {
 function closePopup(evt) {
   curentPopup = evt.target.closest('.popup');
   toggleModal(curentPopup);
+}
+
+function getFocusPopop(popup) {
+  popup.focus();
 }
 
 
@@ -69,6 +76,7 @@ function setOpenImgPopupListener(curentCard) {
   curentCard.querySelector('.card__photo').addEventListener('click', function (evt) {
     const eventTarget = evt.target;
     openImgPopup(eventTarget);
+    getFocusPopop(popupImg);
   })
 }
 
@@ -124,7 +132,8 @@ initialCards.forEach(function (elem, index) {
 //редактирование профиля
 
 editButton.addEventListener('click', function () {
-  openEditProfilePopup(popupEdit)
+  openEditProfilePopup(popupEdit);
+  getFocusPopop(popupEdit);
 });
 
 editFormElement.addEventListener('submit', editProfileFormSubmitHandler);
@@ -136,6 +145,7 @@ closeEditButton.addEventListener('click', closePopup);
 addNewCardButton.addEventListener('click', function () {
   newCardFormElement.reset();
   openEditProfilePopup(popupNewCard);
+  getFocusPopop(popupNewCard);
 });
 
 closeNewCardButton.addEventListener('click', closePopup);
@@ -156,3 +166,22 @@ enableValidation({
   inputErrorClass: 'popup__field_type_error',
   errorClass: 'popup__error_visible',
 });
+
+//закрытие по оверлэю и esc
+
+popupList.forEach((popup) => {
+
+  popup.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(evt);
+    }
+  });
+
+  popup.addEventListener('click', closePopup);
+  popup.querySelector('.popup__container').addEventListener('click', (evt) => {
+    evt.stopPropagation();
+  });
+
+});
+
+
