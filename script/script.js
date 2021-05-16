@@ -34,17 +34,15 @@ function openPopup(popup) {
 
 }
 
-function closePopup() {
-  // curentPopup = evt.target.closest('.popup');
-  popupList.forEach((evt) => {
-    evt.classList.remove('popup_opened');
-  })
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function closePopupByEsc(evt) {
   if (evt.key === 'Escape') {
-    closePopup();
+    const curentPopup = document.querySelector('.popup_opened');
+    closePopup(curentPopup);
   }
 }
 
@@ -96,7 +94,7 @@ function newCardFormSubmitHandler(evt) {
     name: placeName.value,
   }
   addCard(createCard(formData));
-  closePopup();
+  closePopup(popupNewCard);
 }
 
 
@@ -112,7 +110,7 @@ function editProfileFormSubmitHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
-  closePopup();
+  closePopup(popupEdit);
 }
 
 //просмотр изображения
@@ -141,22 +139,22 @@ editButton.addEventListener('click', function () {
 
 editFormElement.addEventListener('submit', editProfileFormSubmitHandler);
 
-closeEditButton.addEventListener('click', closePopup);
+closeEditButton.addEventListener('click', () => {closePopup(popupEdit);});
 
 //добавление новой карточки
 
 addNewCardButton.addEventListener('click', function () {
   newCardFormElement.reset();
-  openEditProfilePopup(popupNewCard);
+  openPopup(popupNewCard);
 });
 
-closeNewCardButton.addEventListener('click', closePopup);
+closeNewCardButton.addEventListener('click', () => {closePopup(popupNewCard);});
 
 newCardFormElement.addEventListener('submit', newCardFormSubmitHandler);
 
 //закрытие попапа с полным изображением
 
-closeImgButton.addEventListener('click', closePopup);
+closeImgButton.addEventListener('click', () => {closePopup(popupImg);});
 
 
 //Валидация форм
@@ -175,7 +173,7 @@ popupList.forEach((popup) => {
 
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup')) {
-      closePopup()
+      closePopup(popup)
     }
   });
 });
