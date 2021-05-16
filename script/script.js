@@ -43,15 +43,16 @@ function closePopup() {
 }
 
 function closePopupByEsc(evt) {
-  if(evt.key === 'Escape') {
-    closePopup();}
+  if (evt.key === 'Escape') {
+    closePopup();
+  }
 }
 
 
 //создание и добавление карточек
 
 function createCard(cardData) {
-  const {link, name} = cardData;
+  const { link, name } = cardData;
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   const cardPhoto = card.querySelector('.card__photo');
   cardPhoto.src = link;
@@ -173,7 +174,8 @@ enableValidation({
 popupList.forEach((popup) => {
 
   popup.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup')) {
-      closePopup()}
+    if (evt.target.classList.contains('popup')) {
+      closePopup()
+    }
   });
 });

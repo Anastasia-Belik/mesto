@@ -18,7 +18,8 @@ const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
-  toggleButtonState(buttonElement, inputList, config);
+  editButton.addEventListener('click', () => { toggleButtonState(buttonElement, inputList, config); })
+  addNewCardButton.addEventListener('click', () => { toggleButtonState(buttonElement, inputList, config); })
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
