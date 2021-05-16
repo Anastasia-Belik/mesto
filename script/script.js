@@ -50,12 +50,13 @@ function closePopupByEsc(evt) {
 
 //создание и добавление карточек
 
-function createCard(link, linkName) {
+function createCard(cardData) {
+  const {link, name} = cardData;
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   const cardPhoto = card.querySelector('.card__photo');
   cardPhoto.src = link;
-  cardPhoto.alt = linkName;
-  card.querySelector('.card__place-name').textContent = linkName;
+  cardPhoto.alt = name;
+  card.querySelector('.card__place-name').textContent = name;
   setLikeCardListener(card);
   setDeleteCardListener(card);
   setOpenImgPopupListener(card);
@@ -89,9 +90,11 @@ function addCard(card) {
 
 function newCardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const link = placeLink.value;
-  const name = placeName.value;
-  addCard(createCard(link, name));
+  const formData = {
+    link: placeLink.value,
+    name: placeName.value,
+  }
+  addCard(createCard(formData));
   closePopup();
 }
 
@@ -124,11 +127,8 @@ function openImgPopup(cardImg) {
 
 //рендеринг карточек
 
-initialCards.forEach(function (elem, index) {
-  const link = initialCards[index].link;
-  const linkName = initialCards[index].name;
-
-  addCard(createCard(link, linkName));
+initialCards.forEach(function (elem) {
+  addCard(createCard(elem));
 });
 
 
