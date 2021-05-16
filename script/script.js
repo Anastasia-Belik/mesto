@@ -139,7 +139,7 @@ editButton.addEventListener('click', function () {
 
 editFormElement.addEventListener('submit', editProfileFormSubmitHandler);
 
-closeEditButton.addEventListener('click', () => {closePopup(popupEdit);});
+closeEditButton.addEventListener('click', () => { closePopup(popupEdit); });
 
 //добавление новой карточки
 
@@ -148,13 +148,13 @@ addNewCardButton.addEventListener('click', function () {
   openPopup(popupNewCard);
 });
 
-closeNewCardButton.addEventListener('click', () => {closePopup(popupNewCard);});
+closeNewCardButton.addEventListener('click', () => { closePopup(popupNewCard); });
 
 newCardFormElement.addEventListener('submit', newCardFormSubmitHandler);
 
 //закрытие попапа с полным изображением
 
-closeImgButton.addEventListener('click', () => {closePopup(popupImg);});
+closeImgButton.addEventListener('click', () => { closePopup(popupImg); });
 
 
 //Валидация форм
