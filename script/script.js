@@ -1,3 +1,5 @@
+import Card from './card.js';
+
 //редактирование профиля
 const editButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -10,7 +12,6 @@ const editFormElement = popupEdit.querySelector('.popup__form');
 
 
 //добавление новой карточки
-const cardTemplate = document.querySelector('#card-template').content;
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const addNewCardButton = document.querySelector('.profile__add-button');
 const placeName = popupNewCard.querySelector('.popup__field_input_place-name');
@@ -46,43 +47,6 @@ function closePopupByEsc(evt) {
   }
 }
 
-
-//создание и добавление карточек
-
-function createCard(cardData) {
-  const { link, name } = cardData;
-  const card = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardPhoto = card.querySelector('.card__photo');
-  cardPhoto.src = link;
-  cardPhoto.alt = name;
-  card.querySelector('.card__place-name').textContent = name;
-  setLikeCardListener(card);
-  setDeleteCardListener(card);
-  setOpenImgPopupListener(card);
-  return card;
-}
-
-function setLikeCardListener(curentCard) {
-  curentCard.querySelector('.card__like').addEventListener('click', function (evt) {
-    const eventTarget = evt.target;
-    eventTarget.classList.toggle('card__like_active');
-  });
-}
-
-function setDeleteCardListener(curentCard) {
-  curentCard.querySelector('.card__del-btn').addEventListener('click', function (evt) {
-    const eventTarget = evt.target.closest('.card');
-    eventTarget.remove();
-  });
-}
-
-function setOpenImgPopupListener(curentCard) {
-  curentCard.querySelector('.card__photo').addEventListener('click', function (evt) {
-    const eventTarget = evt.target;
-    openImgPopup(eventTarget);
-  })
-}
-
 function addCard(card) {
   document.querySelector('.cards').prepend(card);
 }
@@ -93,7 +57,10 @@ function newCardFormSubmitHandler(evt) {
     link: placeLink.value,
     name: placeName.value,
   }
-  addCard(createCard(formData));
+  const card = new Card(formData, '#card-template');
+  const cardElement = card.createCard();
+
+  addCard(cardElement);
   closePopup(popupNewCard);
 }
 
@@ -126,10 +93,11 @@ function openImgPopup(cardImg) {
 
 //рендеринг карточек
 
-initialCards.forEach(function (elem) {
-  addCard(createCard(elem));
+initialCards.forEach((elem) => {
+  const card = new Card(elem, '#card-template');
+  const cardElement = card.createCard();
+  addCard(cardElement);
 });
-
 
 //редактирование профиля
 
@@ -177,3 +145,5 @@ popupList.forEach((popup) => {
     }
   });
 });
+
+
