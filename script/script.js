@@ -32,7 +32,6 @@ const popupList = Array.from(document.querySelectorAll('.popup'));
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
-
 }
 
 function closePopup(popup) {
@@ -126,14 +125,14 @@ closeImgButton.addEventListener('click', () => { closePopup(popupImg); });
 
 
 //Валидация форм
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__field_type_error',
-  errorClass: 'popup__error_visible',
-});
+// enableValidation({
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__field',
+//   submitButtonSelector: '.popup__submit-button',
+//   inactiveButtonClass: 'popup__submit-button_disabled',
+//   inputErrorClass: 'popup__field_type_error',
+//   errorClass: 'popup__error_visible',
+// });
 
 //закрытие по оверлэю и нажатию на esc
 
@@ -146,4 +145,17 @@ popupList.forEach((popup) => {
   });
 });
 
+const formList = Array.from(document.querySelectorAll('.popup__form'));
 
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator({
+    inputSelector: '.popup__field',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputErrorClass: 'popup__field_type_error',
+    errorClass: 'popup__error_visible',
+  },
+    formElement)
+
+  formValidator.enableValidation();
+})
