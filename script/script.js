@@ -1,5 +1,6 @@
-import Card from './card.js';
-import FormValidator from './validate.js'
+import { initialCards } from './initial-cards.js'
+import Card from './Card.js';
+import FormValidator from './Validate.js'
 
 const selectors = {
   inputSelector: '.popup__field',
@@ -10,7 +11,7 @@ const selectors = {
 };
 
 //редактирование профиля
-const editButton = document.querySelector('.profile__edit-button');
+export const editButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit');
 const nameInput = document.querySelector('.popup__field_input_name');
 const jobInput = document.querySelector('.popup__field_input_job');
@@ -22,7 +23,7 @@ const editFormElement = popupEdit.querySelector('.popup__form');
 
 //добавление новой карточки
 const popupNewCard = document.querySelector('.popup_type_new-card');
-const addNewCardButton = document.querySelector('.profile__add-button');
+export const addNewCardButton = document.querySelector('.profile__add-button');
 const placeName = popupNewCard.querySelector('.popup__field_input_place-name');
 const placeLink = popupNewCard.querySelector('.popup__field_input_place-link');
 const newCardFormElement = popupNewCard.querySelector('.popup__form');
@@ -91,28 +92,6 @@ export function openImgPopup(cardImg) {
   popupImgHeading.textContent = cardImg.alt;
 }
 
-// очистка ошибок и кнопки при открытии попапа
-function toggleButtonState(form, disabled) {
-  const buttonElement = form.querySelector(selectors.submitButtonSelector);
-  if (disabled) {
-    buttonElement.classList.add(selectors.inactiveButtonClass);
-  } else {
-    buttonElement.classList.remove(selectors.inactiveButtonClass);
-  }
-}
-
-function clearError(form) {
-  const inputList = Array.from(form.querySelectorAll(selectors.inputSelector));
-  inputList.forEach((evt) => {
-    evt.classList.remove(selectors.inputErrorClass);
-  });
-
-  const errorList = Array.from(form.querySelectorAll('.popup__error'));
-  errorList.forEach((evt) => {
-    evt.classList.remove(selectors.errorClass);
-  });
-}
-
 /////////////////////////////////////
 
 //рендеринг карточек
@@ -129,30 +108,30 @@ editButton.addEventListener('click', function () {
   openPopup(popupEdit);
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  toggleButtonState(editFormElement, false);
-  clearError(editFormElement);
+  // toggleButtonState(editFormElement, false);
+  // clearError(editFormElement);
 });
 
 editFormElement.addEventListener('submit', editProfileFormSubmitHandler);
 
-closeEditButton.addEventListener('click', () => { closePopup(popupEdit); });
+closeEditButton.addEventListener('click', () => closePopup(popupEdit));
 
 //добавление новой карточки
 
 addNewCardButton.addEventListener('click', function () {
   newCardFormElement.reset();
   openPopup(popupNewCard);
-  toggleButtonState(newCardFormElement, true);
-  clearError(newCardFormElement);
+  // toggleButtonState(newCardFormElement, true);
+  // clearError(newCardFormElement);
 });
 
-closeNewCardButton.addEventListener('click', () => { closePopup(popupNewCard); });
+closeNewCardButton.addEventListener('click', () => closePopup(popupNewCard));
 
 newCardFormElement.addEventListener('submit', newCardFormSubmitHandler);
 
 //закрытие попапа с полным изображением
 
-closeImgButton.addEventListener('click', () => { closePopup(popupImg); });
+closeImgButton.addEventListener('click', () => closePopup(popupImg));
 
 //закрытие по оверлэю и нажатию на esc
 

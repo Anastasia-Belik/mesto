@@ -1,3 +1,5 @@
+import { editButton as _editButton, addNewCardButton as _addNewCardButton } from './script.js'
+
 export default class FormValidator {
   constructor(selectors, form) {
     this._selectors = selectors;
@@ -23,6 +25,27 @@ export default class FormValidator {
         this._toggleButtonState(_buttonElement, _inputList);
       });
     })
+
+    _editButton.addEventListener('click', () => {
+      this._clearError(_inputList)
+      this._toggleButtonState(_buttonElement, _inputList);
+    });
+
+    _addNewCardButton.addEventListener('click', () => {
+      this._clearError(_inputList);
+      this._toggleButtonState(_buttonElement, _inputList);
+    });
+  }
+
+  _clearError(_inputList) {
+    _inputList.forEach((evt) => {
+      evt.classList.remove(this._selectors.inputErrorClass);
+    });
+
+    const _errorList = Array.from(this._form.querySelectorAll('.popup__error'));
+    _errorList.forEach((evt) => {
+      evt.classList.remove(this._selectors.errorClass);
+    });
   }
 
   _checkInputValidity(_inputElement) {
