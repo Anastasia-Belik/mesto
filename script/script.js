@@ -108,8 +108,6 @@ editButton.addEventListener('click', function () {
   openPopup(popupEdit);
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  // toggleButtonState(editFormElement, false);
-  // clearError(editFormElement);
 });
 
 editFormElement.addEventListener('submit', editProfileFormSubmitHandler);
@@ -121,8 +119,6 @@ closeEditButton.addEventListener('click', () => closePopup(popupEdit));
 addNewCardButton.addEventListener('click', function () {
   newCardFormElement.reset();
   openPopup(popupNewCard);
-  // toggleButtonState(newCardFormElement, true);
-  // clearError(newCardFormElement);
 });
 
 closeNewCardButton.addEventListener('click', () => closePopup(popupNewCard));
