@@ -1,4 +1,13 @@
 import Card from './card.js';
+import FormValidator from './validate.js'
+
+const selectors = {
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__error_visible',
+};
 
 //редактирование профиля
 const editButton = document.querySelector('.profile__edit-button');
@@ -66,12 +75,6 @@ function newCardFormSubmitHandler(evt) {
 
 //редактирование профиля
 
-function openEditProfilePopup(popup) {
-  openPopup(popup);
-  nameInput.value = userName.textContent;
-  jobInput.value = userJob.textContent;
-}
-
 function editProfileFormSubmitHandler(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
@@ -81,11 +84,33 @@ function editProfileFormSubmitHandler(evt) {
 
 //просмотр изображения
 
-function openImgPopup(cardImg) {
+export function openImgPopup(cardImg) {
   openPopup(popupImg);
   fullImg.src = cardImg.src;
   fullImg.alt = cardImg.alt;
   popupImgHeading.textContent = cardImg.alt;
+}
+
+// очистка ошибок и кнопки при открытии попапа
+function toggleButtonState(form, disabled) {
+  const buttonElement = form.querySelector(selectors.submitButtonSelector);
+  if (disabled) {
+    buttonElement.classList.add(selectors.inactiveButtonClass);
+  } else {
+    buttonElement.classList.remove(selectors.inactiveButtonClass);
+  }
+}
+
+function clearError(form) {
+  const inputList = Array.from(form.querySelectorAll(selectors.inputSelector));
+  inputList.forEach((evt) => {
+    evt.classList.remove(selectors.inputErrorClass);
+  });
+
+  const errorList = Array.from(form.querySelectorAll('.popup__error'));
+  errorList.forEach((evt) => {
+    evt.classList.remove(selectors.errorClass);
+  });
 }
 
 /////////////////////////////////////
@@ -101,7 +126,11 @@ initialCards.forEach((elem) => {
 //редактирование профиля
 
 editButton.addEventListener('click', function () {
-  openEditProfilePopup(popupEdit);
+  openPopup(popupEdit);
+  nameInput.value = userName.textContent;
+  jobInput.value = userJob.textContent;
+  toggleButtonState(editFormElement, false);
+  clearError(editFormElement);
 });
 
 editFormElement.addEventListener('submit', editProfileFormSubmitHandler);
@@ -113,6 +142,8 @@ closeEditButton.addEventListener('click', () => { closePopup(popupEdit); });
 addNewCardButton.addEventListener('click', function () {
   newCardFormElement.reset();
   openPopup(popupNewCard);
+  toggleButtonState(newCardFormElement, true);
+  clearError(newCardFormElement);
 });
 
 closeNewCardButton.addEventListener('click', () => { closePopup(popupNewCard); });
@@ -122,17 +153,6 @@ newCardFormElement.addEventListener('submit', newCardFormSubmitHandler);
 //закрытие попапа с полным изображением
 
 closeImgButton.addEventListener('click', () => { closePopup(popupImg); });
-
-
-//Валидация форм
-// enableValidation({
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__field',
-//   submitButtonSelector: '.popup__submit-button',
-//   inactiveButtonClass: 'popup__submit-button_disabled',
-//   inputErrorClass: 'popup__field_type_error',
-//   errorClass: 'popup__error_visible',
-// });
 
 //закрытие по оверлэю и нажатию на esc
 
@@ -145,17 +165,12 @@ popupList.forEach((popup) => {
   });
 });
 
+// валидация форм
 const formList = Array.from(document.querySelectorAll('.popup__form'));
 
 formList.forEach((formElement) => {
-  const formValidator = new FormValidator({
-    inputSelector: '.popup__field',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_disabled',
-    inputErrorClass: 'popup__field_type_error',
-    errorClass: 'popup__error_visible',
-  },
-    formElement)
-
+  const formValidator = new FormValidator(selectors, formElement)
   formValidator.enableValidation();
 })
+
+

@@ -1,3 +1,5 @@
+import { openImgPopup } from './script.js'
+
 export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
