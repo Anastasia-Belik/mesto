@@ -18,7 +18,6 @@
 
 **Планы**
 
-Добавить возможность ставить лайки.
+Переписать сайт на React.
 
-**Ссылка на проект**
-* https://anastasia-belik.github.io/mesto/src/index.html
+
