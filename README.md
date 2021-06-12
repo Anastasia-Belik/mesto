@@ -21,4 +21,4 @@
 Добавить возможность ставить лайки.
 
 **Ссылка на проект**
-* https://anastasia-belik.github.io/mesto/index.html
+* https://anastasia-belik.github.io/mesto/src/index.html
