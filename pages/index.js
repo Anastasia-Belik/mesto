@@ -1,10 +1,10 @@
-import { initialCards } from './initial-cards.js';
-import Card from './Card.js';
-import FormValidator from './Validate.js';
-import Section from './Section.js';
-import PopupWithImg from './PopupWithImg.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import { initialCards } from '../script/initial-cards.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/Validate.js';
+import Section from '../components/Section.js';
+import PopupWithImg from '../components/PopupWithImg.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components//UserInfo.js';
 
 const selectors = {
   inputSelector: '.popup__field',

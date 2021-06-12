@@ -1,4 +1,4 @@
-import { editButton as _editButton, addNewCardButton as _addNewCardButton } from './script.js'
+import { editButton as _editButton, addNewCardButton as _addNewCardButton } from '../pages/index.js'
 
 export default class FormValidator {
   constructor(selectors, form) {
