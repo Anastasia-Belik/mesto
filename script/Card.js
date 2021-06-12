@@ -1,10 +1,9 @@
-import { openImgPopup } from './script.js'
-
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardTemplate() {
@@ -39,7 +38,7 @@ export default class Card {
   }
 
   _handleImgClick(evt) {
-    openImgPopup(evt.target);
+    this._handleCardClick(evt);
   }
 
   _setEventListeners() {
