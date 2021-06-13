@@ -1,9 +1,10 @@
-import { editButton as _editButton, addNewCardButton as _addNewCardButton } from '../pages/index.js'
-
 export default class FormValidator {
-  constructor(selectors, form) {
+  constructor(selectors, form, openPopupBtn) {
     this._selectors = selectors;
     this._form = form;
+    this._inputList = Array.from(this._form.querySelectorAll(this._selectors.inputSelector));
+    this._buttonElement = this._form.querySelector(this._selectors.submitButtonSelector);
+    this._openPopupBtn = openPopupBtn;
   }
 
   enableValidation() {
@@ -16,29 +17,21 @@ export default class FormValidator {
       evt.preventDefault();
     });
 
-    const _inputList = Array.from(this._form.querySelectorAll(this._selectors.inputSelector));
-    const _buttonElement = this._form.querySelector(this._selectors.submitButtonSelector);
-
-    _inputList.forEach((_inputElement) => {
+    this._inputList.forEach((_inputElement) => {
       _inputElement.addEventListener('input', () => {
         this._checkInputValidity(_inputElement);
-        this._toggleButtonState(_buttonElement, _inputList);
+        this._toggleButtonState(this._buttonElement, this._inputList);
       });
     })
 
-    _editButton.addEventListener('click', () => {
-      this._clearError(_inputList)
-      this._toggleButtonState(_buttonElement, _inputList);
-    });
-
-    _addNewCardButton.addEventListener('click', () => {
-      this._clearError(_inputList);
-      this._toggleButtonState(_buttonElement, _inputList);
+    this._openPopupBtn.addEventListener('click', () => {
+      this._clearError(this._inputList)
+      this._toggleButtonState(this._buttonElement, this._inputList);
     });
   }
 
   _clearError(_inputList) {
-    _inputList.forEach((evt) => {
+    this._inputList.forEach((evt) => {
       evt.classList.remove(this._selectors.inputErrorClass);
     });
 

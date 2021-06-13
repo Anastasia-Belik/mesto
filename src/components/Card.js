@@ -33,8 +33,9 @@ export default class Card {
     evt.target.classList.toggle('card__like_active');
   }
 
-  _handleTrashClick(evt) {
-    evt.target.closest('.card').remove();
+  _handleTrashClick() {
+    this._card.remove();
+    this._card = null;
   }
 
   _handleImgClick(evt) {
