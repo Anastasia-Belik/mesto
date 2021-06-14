@@ -1,4 +1,4 @@
-import { esc as _esc } from '../pages/index.js';
+import { esc as _esc } from '../utils/constants.js';
 
 export default class Popup {
   constructor(popupSelector) {

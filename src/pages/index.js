@@ -15,7 +15,6 @@ const selectors = {
   errorClass: 'popup__error_visible',
 };
 
-export const esc = 'Escape';
 const editButton = document.querySelector('.profile__edit-button');
 const addNewCardButton = document.querySelector('.profile__add-button');
 const inputName = document.querySelector('.popup__field_input_name');
