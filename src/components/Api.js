@@ -1,16 +1,12 @@
 export default class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
-    this.authorization = options.headers.authorization;
-    this['Content-type'] = options.headers['Content-type'];
+    this.headers = options.headers;
   }
 
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: {
-        authorization: this.authorization,
-        'Content-Type': this['Content-type']
-      }
+      headers: this.headers,
     })
       .then(res => {
         if (res.ok) {
@@ -23,10 +19,7 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: {
-        authorization: this.authorization,
-        'Content-Type': this['Content-type']
-      }
+      headers: this.headers,
     })
       .then(res => {
         if (res.ok) {
@@ -35,10 +28,49 @@ export default class Api {
 
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      // .then(res => {
-      //   console.log(res)
-      // })
   }
 
+  updateUserInfo(inputValues) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify(inputValues)
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
 
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
+  postNewCard(inputValues){
+    return fetch(`${this.baseUrl}/cards`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify(inputValues)
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
+  deletCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
 }

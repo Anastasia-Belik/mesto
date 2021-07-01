@@ -31,39 +31,39 @@ const editProfileForm = document.querySelector('.popup_type_edit').querySelector
 const newCardForm = document.querySelector('.popup_type_new-card').querySelector('.popup__form');
 
 
+
 const popupWithImg = new PopupWithImg('.popup_type_img');
 popupWithImg.setEventListeners();
 
 const createNewCard = (data) => {
-  const card = new Card(data, '#card-template', popupWithImg.open.bind(popupWithImg));
+  const card = new Card(data, '#card-template', popupWithImg.open.bind(popupWithImg), api.deletCard.bind(api));
   return card.createCard();
 }
 
+const cards = new Section({
+  renderer: (elem) => {
+    cards.addItem(createNewCard(elem));
+  }
+}
+  , '.cards')
+
 api.getInitialCards()
   .then(data => {
-    const cards = new Section({
-      items: data,
-      renderer: (elem) => {
-        cards.addItem(createNewCard(elem));
-      }
-    }
-      , '.cards')
-    cards.renderItems();
+    console.log(data);
+    cards.renderItems(data)
   });
 
-// const cards = new Section({
-//   items: initialCards1,
-//   renderer: (elem) => {
-//     cards.addItem(createNewCard(elem));
-//   }
-// }
-//   , '.cards')
-// cards.renderItems();
 
 const popupNewCard = new PopupWithForm(
-  (data) => {
-    cards.addItem(createNewCard(data));
-    popupNewCard.close();
+  (inputValues) => {
+    api.postNewCard(inputValues)
+      .then(data => {
+        cards.addItem(createNewCard(data));
+        popupNewCard.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   , '.popup_type_new-card'
 )
@@ -76,12 +76,6 @@ const userInfo = new UserInfo({
 })
 
 api.getUserInfo()
-  .then((result) => {
-    return {
-      username: result.name,
-      userjob: result.about,
-    }
-  })
   .then(data => {
     userInfo.setUserInfo(data);
   })
@@ -89,11 +83,16 @@ api.getUserInfo()
     console.log(err);
   });
 
-
 const popupEditProfile = new PopupWithForm(
   (inputValues) => {
-    userInfo.setUserInfo(inputValues);
-    popupEditProfile.close();
+    api.updateUserInfo(inputValues)
+      .then(data => {
+        userInfo.setUserInfo(data);
+        popupEditProfile.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   , '.popup_type_edit'
 )
@@ -106,6 +105,14 @@ editButton.addEventListener('click', function () {
   inputJob.value = data.userJob;
 });
 
+// const popupDeletCard = new PopupWithForm({
+
+//   }
+//   , '.popup_type_del-card'
+// )
+// popupDeletCard.setEventListeners();
+
+
 
 // валидация форм
 const editFormValidator = new FormValidator(selectors, editProfileForm, editButton);
@@ -114,3 +121,20 @@ editFormValidator.enableValidation();
 const newCardFormValidator = new FormValidator(selectors, newCardForm, addNewCardButton);
 newCardFormValidator.enableValidation();
 
+
+
+
+// fetch(`https://mesto.nomoreparties.co/v1/cohort-25/cards/60dd41233899cd03023797a1`, {
+//       method: 'DELETE',
+//       headers: {authorization: '0a237495-100c-43b6-98f8-6f5b330a108a'},
+//     })
+//       .then(res => {
+//         if (res.ok) {
+//           return res.json();
+//         }
+
+//         return Promise.reject(`Ошибка: ${res.status}`);
+//       })
+//       .then(res => {
+//         console.log(res)
+//       })
