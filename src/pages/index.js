@@ -36,40 +36,43 @@ const newCardForm = document.querySelector('.popup_type_new-card').querySelector
 const popupWithImg = new PopupWithImg('.popup_type_img');
 popupWithImg.setEventListeners();
 
-const createNewCard = (data) => {
-  const card = new Card(data, '#card-template', popupWithImg.open.bind(popupWithImg), popupDeletCard.open.bind(popupDeletCard));
-  return card.createCard('83f3b8efd218aaa7432d16f5');  //TO DO: как подставлять сюда динамически userId?
+const createNewCard = (data, userId) => {
+  const card = new Card(
+    data,
+    '#card-template',
+    popupWithImg.open.bind(popupWithImg),
+    popupDeletCard.open.bind(popupDeletCard),
+    (evt, cardId) => {
+      if (evt.target.classList.contains('card__like_active')) {
+        api.deleteLike(cardId)
+          .then(res => {
+            evt.target.classList.remove('card__like_active');
+            evt.target.closest('.card').querySelector('.card__counter').textContent = res.likes.length;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        api.putLike(cardId)
+          .then(res => {
+            evt.target.classList.add('card__like_active');
+            evt.target.closest('.card').querySelector('.card__counter').textContent = res.likes.length;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  );
+  return card.createCard(userId);
 }
 
 const cards = new Section({
-  renderer: (elem) => {
-    cards.addItem(createNewCard(elem));
+  renderer: (elem, userId) => {
+    cards.addItem(createNewCard(elem, userId));
   }
 }
   , '.cards')
-
-api.getInitialCards()
-  .then(data => {
-    console.log(data);
-    cards.renderItems(data)
-  });
-
-
-const popupNewCard = new PopupWithForm(
-  (inputValues) => {
-    api.postNewCard(inputValues)
-      .then(data => {
-        cards.addItem(createNewCard(data));
-        popupNewCard.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  , '.popup_type_new-card'
-)
-popupNewCard.setEventListeners();
-addNewCardButton.addEventListener('click', popupNewCard.open.bind(popupNewCard));
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__user-name',
@@ -79,6 +82,30 @@ const userInfo = new UserInfo({
 api.getUserInfo()
   .then(data => {
     userInfo.setUserInfo(data);
+    return data._id
+  })
+  .then((userId) => {
+    api.getInitialCards()
+      .then(data => {
+        cards.renderItems(data, userId)
+      });
+
+    const popupNewCard = new PopupWithForm(
+      (inputValues) => {
+        api.postNewCard(inputValues)
+          .then(data => {
+            cards.addItem(createNewCard(data, userId));
+            popupNewCard.close();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      , '.popup_type_new-card'
+    )
+    popupNewCard.setEventListeners();
+    addNewCardButton.addEventListener('click', popupNewCard.open.bind(popupNewCard));
+
   })
   .catch((err) => {
     console.log(err);
@@ -106,13 +133,12 @@ editButton.addEventListener('click', function () {
   inputJob.value = data.userJob;
 });
 
-const popupDeletCard = new PopupVerification (
+const popupDeletCard = new PopupVerification(
   (card, cardId) => {
     card.remove();
     api.deletCard(cardId);
     popupDeletCard.close()
   }
-
   , '.popup_type_del-card'
 )
 popupDeletCard.setEventListeners();
@@ -129,17 +155,4 @@ newCardFormValidator.enableValidation();
 
 
 
-// fetch(`https://mesto.nomoreparties.co/v1/cohort-25/cards/60dd41233899cd03023797a1`, {
-//       method: 'DELETE',
-//       headers: {authorization: '0a237495-100c-43b6-98f8-6f5b330a108a'},
-//     })
-//       .then(res => {
-//         if (res.ok) {
-//           return res.json();
-//         }
 
-//         return Promise.reject(`Ошибка: ${res.status}`);
-//       })
-//       .then(res => {
-//         console.log(res)
-//       })
