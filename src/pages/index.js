@@ -4,6 +4,7 @@ import FormValidator from '../components/Validate.js';
 import Section from '../components/Section.js';
 import PopupWithImg from '../components/PopupWithImg.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupVerification from '../components/PopupVerification.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -36,8 +37,8 @@ const popupWithImg = new PopupWithImg('.popup_type_img');
 popupWithImg.setEventListeners();
 
 const createNewCard = (data) => {
-  const card = new Card(data, '#card-template', popupWithImg.open.bind(popupWithImg), api.deletCard.bind(api));
-  return card.createCard();
+  const card = new Card(data, '#card-template', popupWithImg.open.bind(popupWithImg), popupDeletCard.open.bind(popupDeletCard));
+  return card.createCard('83f3b8efd218aaa7432d16f5');  //TO DO: как подставлять сюда динамически userId?
 }
 
 const cards = new Section({
@@ -105,12 +106,16 @@ editButton.addEventListener('click', function () {
   inputJob.value = data.userJob;
 });
 
-// const popupDeletCard = new PopupWithForm({
+const popupDeletCard = new PopupVerification (
+  (card, cardId) => {
+    card.remove();
+    api.deletCard(cardId);
+    popupDeletCard.close()
+  }
 
-//   }
-//   , '.popup_type_del-card'
-// )
-// popupDeletCard.setEventListeners();
+  , '.popup_type_del-card'
+)
+popupDeletCard.setEventListeners();
 
 
 
