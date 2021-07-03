@@ -45,7 +45,22 @@ export default class Api {
       })
   }
 
-  postNewCard(inputValues){
+  updateAvatar(avatarLink) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify(avatarLink)
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  }
+
+  postNewCard(inputValues) {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
       headers: this.headers,

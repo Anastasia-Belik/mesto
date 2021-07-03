@@ -21,13 +21,13 @@ export default class Card {
   createCard(userId) {
     this._card = this._getCardTemplate();
 
-    if(userId === this._data.owner._id) {
+    if (userId === this._data.owner._id) {
       this._card.insertAdjacentHTML('beforeend'
-      , '<button class="card__del-btn" type="button" aria-label="Удалить карточку"></button>');
+        , '<button class="card__del-btn" type="button" aria-label="Удалить карточку"></button>');
     }
 
     this._data.likes.forEach(elem => {
-      if(elem._id === userId) {
+      if (elem._id === userId) {
         this._card.querySelector('.card__like').classList.add('card__like_active');
       }
     });
@@ -38,9 +38,7 @@ export default class Card {
     _cardPhoto.src = this._data.link;
     _cardPhoto.alt = this._data.name;
     this._card.querySelector('.card__place-name').textContent = this._data.name;
-
-    const likeCounter = this._card.querySelector('.card__counter');
-    likeCounter.textContent = this._data.likes.length;
+    this._card.querySelector('.card__counter').textContent = this._data.likes.length;
 
     return this._card
   }
@@ -63,7 +61,7 @@ export default class Card {
       this._handleImgClick(evt)
     });
 
-    if(userId === this._data.owner._id) {
+    if (userId === this._data.owner._id) {
       this._card.querySelector('.card__del-btn').addEventListener('click', (evt) => {
         this._handleTrashClick(evt.target.closest('.card'));
       });
