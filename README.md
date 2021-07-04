@@ -17,7 +17,7 @@
 * При написании использовались HTML, CSS, flex, grid, JS.
 
 **Ссылка на проект**
-* https://anastasia-belik.github.io/mesto/src/index.html
+* https://anastasia-belik.github.io/mesto/index.html
 
 **Планы**
 
