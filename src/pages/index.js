@@ -21,7 +21,8 @@ const selectors = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__field_type_error',
-  errorClass: 'popup__error_visible',
+  errorClassVisible: 'popup__error_visible',
+  errorClass: '.popup__error',
 };
 
 const editButton = document.querySelector('.profile__edit-button');
@@ -34,7 +35,7 @@ const newCardForm = document.querySelector('.popup_type_new-card').querySelector
 const editAvatarForm = document.querySelector('.popup_type_edit-avatar').querySelector('.popup__form');
 const avatar = document.querySelector('.profile__avatar');
 
-function renderLoading(isLoading, popup, buttonText = "Сохранить") {
+function renderLoading(isLoading, popup, buttonText = 'Сохранить') {
   if (isLoading) {
     popup.querySelector('.popup__submit-button').textContent = 'Сохранение...'
   } else {
@@ -182,9 +183,14 @@ popupWithImg.setEventListeners();
 //попап с подтверждением удаления карточки
 const popupDeletCard = new PopupVerification(
   (card, cardId) => {
-    card.remove();
-    api.deletCard(cardId);
-    popupDeletCard.close()
+    api.deletCard(cardId)
+    .then(() => {
+      card.remove();
+      popupDeletCard.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
   , '.popup_type_del-card'
 )

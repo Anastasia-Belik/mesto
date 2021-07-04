@@ -1,1 +1,1 @@
-export const esc = 'Escape';
+export const ESC_KEY = 'Escape';

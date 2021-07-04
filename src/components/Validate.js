@@ -35,9 +35,9 @@ export default class FormValidator {
       evt.classList.remove(this._selectors.inputErrorClass);
     });
 
-    const _errorList = Array.from(this._form.querySelectorAll('.popup__error'));
+    const _errorList = Array.from(this._form.querySelectorAll(this._selectors.errorClass));
     _errorList.forEach((evt) => {
-      evt.classList.remove(this._selectors.errorClass);
+      evt.classList.remove(this._selectors.errorClassVisible);
     });
   }
 
@@ -71,13 +71,13 @@ export default class FormValidator {
     const _errorElement = this._form.querySelector(`.${_inputElement.id}-error`);
     _inputElement.classList.add(this._selectors.inputErrorClass);
     _errorElement.textContent = _inputElement.validationMessage;
-    _errorElement.classList.add(this._selectors.errorClass);
+    _errorElement.classList.add(this._selectors.errorClassVisible);
   }
 
   _hideInputError(_inputElement) {
     const _errorElement = this._form.querySelector(`.${_inputElement.id}-error`);
     _inputElement.classList.remove(this._selectors.inputErrorClass);
-    _errorElement.classList.remove(this._selectors.errorClass);
+    _errorElement.classList.remove(this._selectors.errorClassVisible);
     _errorElement.textContent = '';
   }
 }
